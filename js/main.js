@@ -85,7 +85,9 @@ function getPageContainer() {
 function getMainPage() {
     const page = document.createElement('div');
     page.className = 'main-page';
-    page.prepend(getSliderPromoProduct())
+    const slider = getSliderPromoProduct();
+    const section = getSection();
+    page.append(slider,section);
     return page;
 }
 
@@ -137,7 +139,62 @@ function getButton() {
     return button
 }
 
+function getSection() {
+    const section = document.createElement('section');
+    section.className = 'hero';
+    const container = getContainer();
+    container.classList.add('hero__container');
+    section.append(container);
 
+    return section;
+}
+
+function getTitleAndSearchBox() {
+    const content = document.createElement('div');
+    content.className = 'title-and-search-box';
+    const title = getTitle('h2','title');
+    title.textContent = 'Все кроссовки';
+    const search = getSearchBox();
+    content.append(title,search);
+
+    return content;
+}
+
+function getSearchBox() {
+    const form = document.createElement('form');
+    form.className = 'search-form';
+    const input = document.createElement('input');
+    input.setAttribute('type', 'search');
+    input.className = 'search-form__input'
+    const button = document.createElement('button');
+    button.className = 'search-form__button';
+    const iconSearch = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+    iconSearch.classList.add('nav__icon');
+    const iconSearchUse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    iconSearchUse.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', './img/svg/sprite.svg#search');
+
+    iconSearch.appendChild(iconSearchUse);
+    button.append(iconSearch);
+    form.append(button, input);
+
+    return form;
+}
+
+function getTitle(tag = 'h2',addClass = 'title') {
+    const title = document.createElement(tag);
+    title.className = addClass;
+
+    return title;
+}
+
+function getContainer() {
+    const container = document.createElement('div');
+    container.className = 'container';
+    const content = getTitleAndSearchBox();
+    container.prepend(content);
+
+    return container;
+}
 
 const header = getHeader();
 const pageContainer = getPageContainer();
