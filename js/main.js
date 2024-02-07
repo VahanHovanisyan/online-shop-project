@@ -87,6 +87,7 @@ function getMainPage() {
     page.className = 'main-page';
     const slider = getSliderPromoProduct();
     const section = getSection();
+    section.className = 'hero'
     page.append(slider,section);
     return page;
 }
@@ -141,7 +142,6 @@ function getButton() {
 
 function getSection() {
     const section = document.createElement('section');
-    section.className = 'hero';
     const container = getContainer();
     container.classList.add('hero__container');
     section.append(container);
@@ -194,6 +194,35 @@ function getContainer() {
     container.prepend(content);
 
     return container;
+}
+
+function getProduct() {
+    const product = document.createElement('article');
+    product.className = 'product';
+    const link = document.createElement('a');
+    link.className = 'product__link';
+    const buttonFavorite = document.createElement('button');
+    buttonFavorite.className = 'product__favorite-button';
+    const buttonPlus = document.createElement('button');
+    buttonPlus.className = 'product__plus-button';
+
+    const iconFavorite = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+    iconFavorite.classList.add('nav__icon');
+    const iconPlus = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+    iconPlus.classList.add('nav__icon');
+
+    const iconFavoriteUse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    const iconPlusUse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+
+    iconFavoriteUse.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', './img/svg/sprite.svg#cart');
+    iconPlusUse.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', './img/svg/sprite.svg#favorite');
+
+    iconFavorite.appendChild(iconFavoriteUse);
+    iconPlus.appendChild(iconPlusUse);
+
+    buttonFavorite.append(iconFavorite);
+    buttonPlus.append(iconPlus);
+    
 }
 
 const header = getHeader();
